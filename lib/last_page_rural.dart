@@ -27,7 +27,7 @@ class SecondPage extends StatelessWidget {
     'lib/bin/Tree.png' : 20,
     'lib/bin/axe.png' : -7,
     'lib/bin/compost.png' : 10,
-    'lib/bin/Organic_Fertilizer.jpg' : 5,
+    'lib/bin/Organic_Fertilizer.png' : 5,
     'lib/bin/Chemical_Fertilizer.png': -5};
 
   Map<String, String> imageDeductionsReasons = {
