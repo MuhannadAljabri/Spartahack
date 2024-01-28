@@ -81,6 +81,11 @@ flutter:
      - lib/bin/EV.svg
      - lib/bin/chemical_fertilizer.svg
      - lib/bin/recycle-bin-trash.svg
+     - lib/bin/axe.png
+     - lib/bin/solarpanels.png
+     - lib/bin/gascar.png
+     - lib/bin/hydcar.png
+     - lib/bin/bicycle.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

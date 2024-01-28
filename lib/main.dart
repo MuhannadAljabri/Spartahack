@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       initialRoute: '/',
       routes: {
-        '/': (context) => DragPage(),
+        '/': (context) => MyHomePage(),
         'rural_page': (context) => RuralPage(),
         'urban_page': (context) => UrbanPage(),
       },
