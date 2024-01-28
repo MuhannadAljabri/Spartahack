@@ -9,7 +9,7 @@ class UrbanPage extends StatelessWidget {
         height: double.infinity,
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage('lib/bin/farm_field.jpg'), // Replace with your image asset path
+            image: AssetImage('lib/bin/city.jpg'), // Replace with your image asset path
             fit: BoxFit.cover,
           ),
         ),

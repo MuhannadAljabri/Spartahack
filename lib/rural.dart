@@ -11,7 +11,6 @@ class _RuralPageState extends State<RuralPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.transparent, // or your desired background color
       appBar: _buildAppBar(),
       drawer: _buildDrawer(),
       body: _buildBody(),
