@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-
-
 class RuralPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -30,6 +28,13 @@ class RuralPage extends StatelessWidget {
             ],
           ),
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.pop(context); // This line will navigate back to the previous screen
+        },
+        child: Icon(Icons.home), // Icon for the button
+        tooltip: 'Go back to home', // Tooltip text on long press
       ),
     );
   }

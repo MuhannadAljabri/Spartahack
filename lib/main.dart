@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:msu_hackathon/rural.dart';
+import 'package:msu_hackathon/urban.dart';
 
 void main() {
   runApp(MyApp());
@@ -9,11 +10,12 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(initialRoute: '/',
-      // Routes
+    return MaterialApp(
+      initialRoute: '/',
       routes: {
-        '/': (context) =>  MyHomePage(),
-        'rural_page':(context) =>  RuralPage()
+        '/': (context) => MyHomePage(),
+        'rural_page': (context) => RuralPage(),
+        'urban_page': (context) => UrbanPage(),
       },
     );
   }
@@ -29,69 +31,65 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    // Force landscape orientation
+    _setOrientationAndUIConfig();
+    return Scaffold(
+      body: Center(
+        child: showStartButton ? _buildStartButton() : _buildNavigationButtons(),
+      ),
+    );
+  }
+
+  void _setOrientationAndUIConfig() {
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.landscapeLeft,
       DeviceOrientation.landscapeRight,
     ]);
-
-    // Hide system overlays
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
+  }
 
-    return Scaffold(
-      body: Center(
-        child: showStartButton
-            ? Container(
-                width: 200,
-                height: 200,
-                decoration: BoxDecoration(
-                  shape: BoxShape.rectangle,
-                  borderRadius: BorderRadius.circular(20),
-                  
-                ),
-                child: ElevatedButton(
-                  onPressed: () {
-                    setState(() {
-                      showStartButton = false;
-                    });
-                  },
-                  
-                  child: Text("Start"),
-                ),
-              )
-            : Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  ElevatedButton(
-                    onPressed: () {
-                      // Handle button 1 press
-                      print("Button 1 pressed!");
-                    },
-                    child: Container(
-                      child: Center(child: Text("Urban")),
-                          width: 60,
-                          height: 60,
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,))
-                  ),
-                  ElevatedButton(
-                    onPressed: () {
-                      // Handle button 2 press
-                      Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => RuralPage(),
-              ));
-                    },
-                    child: Container(
-                      child: Center(child:Text("Rural")),
-                          width: 60,
-                          height: 60,
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,)
-                  ),)
-                ],
-              ),
+  Widget _buildStartButton() {
+    return Container(
+      width: 200,
+      height: 200,
+      decoration: BoxDecoration(
+        shape: BoxShape.rectangle,
+        borderRadius: BorderRadius.circular(20),
+      ),
+      child: ElevatedButton(
+        onPressed: () => setState(() => showStartButton = false),
+        child: Text("Start"),
+      ),
+    );
+  }
+
+  Widget _buildNavigationButtons() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: [
+        _navigationButton("Urban", () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => UrbanPage()),
+          );
+        }),
+        _navigationButton("Rural", () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => RuralPage()),
+          );
+        }),
+      ],
+    );
+  }
+
+  Widget _navigationButton(String text, VoidCallback onPressed) {
+    return ElevatedButton(
+      onPressed: onPressed,
+      child: Container(
+        child: Center(child: Text(text)),
+        width: 60,
+        height: 60,
+        decoration: BoxDecoration(shape: BoxShape.circle),
       ),
     );
   }
