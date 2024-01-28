@@ -16,7 +16,7 @@ class ThirdPage extends StatelessWidget {
   ThirdPage({required this.selectedImages});
 
 
-    int userScore = 100;
+    int userScore = 0;
 
   // Map to store deduction values for each image
   Map<String, int> imageDeductions = {
@@ -62,7 +62,7 @@ int updateScore() {
       appBar: AppBar(
         title: Text("Your results"),
       ),
-      body: Column(
+      body: SingleChildScrollView(child:Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
@@ -78,8 +78,8 @@ int updateScore() {
              Container(height: 60, width: 650 ,child: Text(imageDeductionsReasons[imagePath].toString())),
              SizedBox(width: 40,), Text(imageDeductions[imagePath].toString(),) 
           ]),
-        Text("Your resulting points: ${updateScore().clamp(0, 100)}")],
-      ),
+        Text("Your resulting points: ${updateScore()}")],
+      )),
     );
   }
 }
