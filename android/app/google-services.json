@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "642585158933",
+    "project_id": "ecosphere-explorer",
+    "storage_bucket": "ecosphere-explorer.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:642585158933:android:de93eb47d7516f28bfb51c",
+        "android_client_info": {
+          "package_name": "com.example.msu_hackathon"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDQdu8WbbKvc71N1Bn2tPWR-EX5Flp7kl8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
