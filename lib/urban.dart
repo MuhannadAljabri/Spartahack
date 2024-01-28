@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:msu_hackathon/last_page_urban.dart';
 
 class UrbanPage extends StatefulWidget {
   @override
@@ -82,16 +83,42 @@ class _UrbanPageState extends State<UrbanPage> {
           }).toList(),
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.pop(context);
-        },
-        child: Icon(Icons.home),
-        tooltip: 'Go back to home',
-      ),
+      floatingActionButton: buildFloatingActionButton()
     );
   }
+
+
+Widget buildFloatingActionButton() {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.end,
+      crossAxisAlignment: CrossAxisAlignment.end,
+      children: [
+        FloatingActionButton(
+          onPressed: () => Navigator.pop(context),
+          child: Icon(Icons.home),
+          tooltip: 'Go back to home',
+        ),
+        SizedBox(height: 10),
+        FloatingActionButton.extended(
+          onPressed: () => Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => ThirdPage(selectedImages: selectedImages),
+            ),
+          ),
+          label: Text('Simulate'),
+          icon: Icon(Icons.navigate_next),
+          backgroundColor: Colors.blue,
+        ),
+      ],
+    );
+  }
+
 }
+
+
+  
+
 
 class AppDrawer extends StatelessWidget {
   final List<String> availableImages;

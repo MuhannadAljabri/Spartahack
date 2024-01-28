@@ -22,6 +22,8 @@ class MyApp extends StatelessWidget {
         '/': (context) => MyHomePage(),
         'rural_page': (context) => RuralPage(),
         'urban_page': (context) => UrbanPage(),
+                'urban_page': (context) => UrbanPage(),
+
       },
     );
   }
