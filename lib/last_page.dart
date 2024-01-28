@@ -16,17 +16,18 @@ class SecondPage extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Text(
-            "Selected Images:",
+            "Selected objects for a rural environment:",
             style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
           ),
           SizedBox(height: 10.0),
           // Display selected images
           for (var imagePath in selectedImages)
-            Image.asset(
+            Row(children: [Image.asset(
               imagePath,
               width: 100.0,
               height: 100.0,
-            ),
+            ), SizedBox(width: 40,), 
+          ])
         ],
       ),
     );

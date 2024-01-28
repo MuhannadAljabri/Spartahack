@@ -14,18 +14,15 @@ class _UrbanPageState extends State<UrbanPage> {
     'lib/bin/Street_Light.png',
     'lib/bin/Trash_Bin.png',
     'lib/bin/Recycle_Bin.jpg',
-    'lib/bin/Factory.jpg',
-    'lib/bin/Bicycle.png',
-
+    'lib/bin/factory.jpg',
+    'lib/bin/bicycle.png',
   ];
 
-  // Corrected Map declaration
   Map<String, Offset> imagePositions = {
-    'lib/bin/gascar.png': Offset(500, 200),
+    'lib/bin/Gas_Truck.png': Offset(500, 200),
     // Add other images and their positions here
   };
 
-  // Adding selectedImages as a List<String>
   List<String> selectedImages = [];
 
   @override
@@ -46,7 +43,7 @@ class _UrbanPageState extends State<UrbanPage> {
         height: double.infinity,
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage('lib/bin/city.jpg'), // Replace with your image asset path
+            image: AssetImage('lib/bin/city.jpg'),
             fit: BoxFit.cover,
           ),
         ),
@@ -75,10 +72,10 @@ class _UrbanPageState extends State<UrbanPage> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.pop(context); // Navigates back to the previous screen
+          Navigator.pop(context);
         },
-        child: Icon(Icons.home), // Icon for the button
-        tooltip: 'Go back to home', // Tooltip text on long press
+        child: Icon(Icons.home),
+        tooltip: 'Go back to home',
       ),
     );
   }

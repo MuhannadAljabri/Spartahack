@@ -41,6 +41,7 @@ dependencies:
   smooth_page_indicator: ^1.1.0
   flutter_svg: ^2.0.9
   firebase_database: ^10.3.4
+  carousel_slider: ^4.0.0  # Check for the latest version on pub.dev
 
 dev_dependencies:
   flutter_test:
@@ -66,32 +67,26 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-     - lib/bin/farm_field.jpg
-     - lib/bin/cows.png
-     - lib/bin/city.jpg
-     - lib/bin/factory.svg
-     - lib/bin/trash-bin.png
-     - lib/bin/tractor.png
-     - lib/bin/compost.png
-     - lib/bin/EV.svg
-     - lib/bin/factory.svg
-     - lib/bin/organic_fertilizer.svg
-     - lib/bin/silo.svg
-     - lib/bin/streetlight.svg
-     - lib/bin/EV.svg
-     - lib/bin/chemical_fertilizer.svg
-     - lib/bin/recycle-bin-trash.svg
-     - lib/bin/axe.png
-     - lib/bin/solarpanels.png
-     - lib/bin/gascar.png
-     - lib/bin/hydcar.png
-     - lib/bin/bicycle.png
-     - lib/bin/city.jpg
-     - lib/bin/tractor.png
-     - lib/bin/compost.png
-     - lib/bin/axe.png
-     - lib/bin/bicycle.png
-
+    - lib/bin/city.jpg
+    - lib/bin/tractor.png
+    - lib/bin/compost.png
+    - lib/bin/axe.png
+    - lib/bin/bicycle.png
+    - lib/bin/Chemical_Fertilizer.png
+    - lib/bin/Cow.png
+    - lib/bin/factory.jpg
+    - lib/bin/Farm Field.jpg
+    - lib/bin/Gas_Truck.png
+    - lib/bin/Hydro_Car.png
+    - lib/bin/Organic_Fertilizer.jpg
+    - lib/bin/Recycle_Bin.jpg
+    - lib/bin/Silo.jpg
+    - lib/bin/Solar_Panels.png
+    - lib/bin/Tesla.png
+    - lib/bin/tractor.png
+    - lib/bin/Trash_Bin.png
+    - lib/bin/Street_Light.png
+    - lib/bin/Tree.jpg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
