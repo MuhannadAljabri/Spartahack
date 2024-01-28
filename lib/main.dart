@@ -22,8 +22,6 @@ class MyApp extends StatelessWidget {
         '/': (context) => MyHomePage(),
         'rural_page': (context) => RuralPage(),
         'urban_page': (context) => UrbanPage(),
-                'urban_page': (context) => UrbanPage(),
-
       },
     );
   }
@@ -42,25 +40,21 @@ class _MyHomePageState extends State<MyHomePage> {
     _setOrientationAndUIConfig();
     return Scaffold(
       body: Center(
-        child: showStartButton ? _buildStartButton() : _buildNavigationButtons(),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            if (showStartButton) ...[
+              _buildTitleAndDescription(),
+              SizedBox(height: 20), // Space between title/description and button
+              _buildStartButton(),
+            ] else ...[
+              _buildNavigationButtons(),
+            ],
+          ],
+        ),
       ),
     );
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    _setOrientationAndUIConfig();
-  }
-
-  @override
-  void dispose() {
-    // Reset orientation on dispose, if needed
-    SystemChrome.setPreferredOrientations([
-      DeviceOrientation.portraitUp,
-      DeviceOrientation.portraitDown,
-    ]);
-    super.dispose();
   }
 
   void _setOrientationAndUIConfig() {
@@ -70,20 +64,51 @@ class _MyHomePageState extends State<MyHomePage> {
     ]);
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
   }
-
-  Widget _buildStartButton() {
-    return ElevatedButton(
-      onPressed: () => setState(() => showStartButton = false),
-      style: ElevatedButton.styleFrom(
-        primary: Colors.blue, // Button color
-        onPrimary: Colors.white, // Text color
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(20),
+  // New method for title and description
+  Widget _buildTitleAndDescription() {
+    return Column(
+      children: [
+        Text(
+          "EcoSphere Explorer",
+          style: TextStyle(
+            fontFamily: 'Monsterrat', // Specify your custom font
+            fontSize: 28, // Adjust the font size
+            fontWeight: FontWeight.bold,
+          ),
         ),
-      ),
-      child: Text("Play"),
+        SizedBox(height: 8), // Space between title and description
+        Text(
+          "Choose your path and see how you effect the enviroment .",
+          style: TextStyle(
+            fontFamily: 'Monsterrat',
+            fontSize: 18, // Adjust the font size
+            fontWeight: FontWeight.normal,
+          ),
+        ),
+      ],
     );
   }
+Widget _buildStartButton() {
+  return ElevatedButton(
+    onPressed: () => setState(() => showStartButton = false),
+    style: ElevatedButton.styleFrom(
+      primary: Colors.blue, // Button color
+      onPrimary: Colors.white, // Text color
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(20),
+      ),
+    ),
+    child: Text(
+      "Play",
+      style: TextStyle(
+        fontFamily: 'Monsterrat', // Use your font family
+        fontSize: 20, // Adjust the font size
+        fontWeight: FontWeight.bold, // Optional
+      ),
+    ),
+  );
+}
+
 
   Widget _buildNavigationButtons() {
     return Row(
