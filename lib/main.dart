@@ -81,7 +81,7 @@ class _MyHomePageState extends State<MyHomePage> {
           borderRadius: BorderRadius.circular(20),
         ),
       ),
-      child: Text("Start"),
+      child: Text("Play"),
     );
   }
 

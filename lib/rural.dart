@@ -10,15 +10,28 @@ class _RuralPageState extends State<RuralPage> {
   List<String> availableImages = [
     'lib/bin/Cow.png',
     'lib/bin/tractor.png', // Ensure this is the correct path.
-    'lib/bin/Silo.jpg',
+    'lib/bin/Silo.png',
     'lib/bin/Solar_Panels.png',
     'lib/bin/Tree.png',
     'lib/bin/axe.png',
     'lib/bin/compost.png',
-    'lib/bin/Organic_Fertilizer.jpg',
+    'lib/bin/Organic_Fertilizer.png',
     'lib/bin/Chemical_Fertilizer.png',
   ];
 
+  Map<String, Offset> imagePositions = {
+    'lib/bin/Cow.png': Offset(500, 200),
+    'lib/bin/tractor.png': Offset(200,200),
+    'lib/bin/Silo.png': Offset(200,50),
+    'lib/bin/Solar_Panels.png': Offset(500,5),
+    'lib/bin/Tree.png': Offset(75,200),
+    'lib/bin/axe.png': Offset(650,225),
+    'lib/bin/compost.png': Offset(450,150),
+    'lib/bin/Organic_Fertilizer.png': Offset(100,50),
+    'lib/bin/Chemical_Fertilizer.png': Offset(250,60),
+
+    // Add other images and their positions here
+  };
   List<String> selectedImages = [];
 
   @override
@@ -49,26 +62,27 @@ List<Widget> buildStackedImages() {
 
   var imageWidgets = <Widget>[backgroundImage];
 
-  imageWidgets.addAll(List<Widget>.generate(selectedImages.length, (index) {
-    String imagePath = selectedImages[index];
+  imageWidgets.addAll(selectedImages.map((imagePath) {
+    final position = imagePositions[imagePath] ?? Offset(0, 0); // Use the position from the map
     return Positioned(
-      left: 50.0 + index * 100.0,
-      top: 75.0,
+      left: position.dx,
+      top: position.dy,
       child: GestureDetector(
         onTap: () {
           setState(() {
             // Remove the image from selectedImages and add it back to availableImages
-            selectedImages.removeAt(index);
+            selectedImages.remove(imagePath);
             availableImages.add(imagePath);
           });
         },
         child: Image.asset(imagePath, width: 100.0, height: 100.0),
       ),
     );
-  }));
+  }).toList());
 
   return imageWidgets;
 }
+
 
   Widget buildFloatingActionButton() {
     return Column(

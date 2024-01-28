@@ -78,9 +78,9 @@ flutter:
     - lib/bin/Farm Field.jpg
     - lib/bin/Gas_Truck.png
     - lib/bin/Hydro_Car.png
-    - lib/bin/Organic_Fertilizer.jpg
+    - lib/bin/Organic_Fertilizer.png
     - lib/bin/Recycle_Bin.png
-    - lib/bin/Silo.jpg
+    - lib/bin/Silo.png
     - lib/bin/Solar_Panels.png
     - lib/bin/Tesla.png
     - lib/bin/tractor.png
