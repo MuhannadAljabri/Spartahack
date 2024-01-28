@@ -8,7 +8,13 @@ class RuralPage extends StatefulWidget {
 class _RuralPageState extends State<RuralPage> {
   List<String> availableImages = [
     'lib/bin/Cow.png',
-    'lib/bin/Tractor.png',
+    'lib/bin/tractor.png',
+    'lib/bin/Chemical_Fertilizer.png',
+    'lib/bin/compost.png',
+    'lib/bin/Organic_Fertilizer.jpg',
+    'lib/bin/Silo.jpg',
+    'lib/bin/Solar_Panels.png',
+    'lib/bin/Tree.jpg',
   ];
 
   List<String> selectedImages = [];

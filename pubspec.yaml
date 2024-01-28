@@ -86,7 +86,7 @@ flutter:
     - lib/bin/tractor.png
     - lib/bin/Trash_Bin.png
     - lib/bin/Street_Light.png
-    - lib/bin/Tree.jpg
+    - lib/bin/Tree.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
