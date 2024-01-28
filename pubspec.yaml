@@ -69,6 +69,18 @@ flutter:
      - lib/bin/farm_field.jpg
      - lib/bin/cows.png
      - lib/bin/city.jpg
+     - lib/bin/factory.svg
+     - lib/bin/trash-bin.png
+     - lib/bin/tractor.png
+     - lib/bin/compost.png
+     - lib/bin/EV.svg
+     - lib/bin/factory.svg
+     - lib/bin/organic_fertilizer.svg
+     - lib/bin/silo.svg
+     - lib/bin/streetlight.svg
+     - lib/bin/EV.svg
+     - lib/bin/chemical_fertilizer.svg
+     - lib/bin/recycle-bin-trash.svg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
