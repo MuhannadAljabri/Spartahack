@@ -15,15 +15,26 @@ class _UrbanPageState extends State<UrbanPage> {
     'lib/bin/trash-bin.png',
   ];
 
+  // Corrected Map declaration
+  Map<String, Offset> imagePositions = {
+    'lib/bin/gascar.png': Offset(500, 200),
+    // Add other images and their positions here
+  };
+
+  // Adding selectedImages as a List<String>
+  List<String> selectedImages = [];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-      ),
+      appBar: AppBar(),
       drawer: AppDrawer(
         availableImages: availableImages,
         onImageSelected: (String imagePath) {
-          // Implement your logic for image selection here
+          setState(() {
+            availableImages.remove(imagePath);
+            selectedImages.add(imagePath);
+          });
         },
       ),
       body: Container(
@@ -35,14 +46,27 @@ class _UrbanPageState extends State<UrbanPage> {
             fit: BoxFit.cover,
           ),
         ),
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-
-              // Add more widgets as needed
-            ],
-          ),
+        child: Stack(
+          children: selectedImages.map((imagePath) {
+            final position = imagePositions[imagePath] ?? Offset(0, 0);
+            return Positioned(
+              left: position.dx,
+              top: position.dy,
+              child: GestureDetector(
+                onTap: () {
+                  setState(() {
+                    selectedImages.remove(imagePath);
+                    availableImages.add(imagePath);
+                  });
+                },
+                child: Image.asset(
+                  imagePath,
+                  width: 100.0,
+                  height: 100.0,
+                ),
+              ),
+            );
+          }).toList(),
         ),
       ),
       floatingActionButton: FloatingActionButton(
@@ -67,16 +91,14 @@ class AppDrawer extends StatelessWidget {
     return Drawer(
       child: ListView(
         children: availableImages.map((imagePath) {
-          // Extracting the image name from the path for displaying as text
           var imageName = imagePath.split('/').last.split('.').first;
-
           return ListTile(
             leading: Image.asset(
               imagePath,
               width: 40.0,
               height: 40.0,
             ),
-            title: Text(imageName), // Display the image name here
+            title: Text(imageName),
             onTap: () => onImageSelected(imagePath),
           );
         }).toList(),
@@ -84,4 +106,3 @@ class AppDrawer extends StatelessWidget {
     );
   }
 }
-
