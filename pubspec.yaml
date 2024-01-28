@@ -86,7 +86,11 @@ flutter:
      - lib/bin/gascar.png
      - lib/bin/hydcar.png
      - lib/bin/bicycle.png
-     - D:\Desktop\MSU_hackathon\msu_hackathon\lib\bin\axe.png
+     - lib/bin/city.jpg
+     - lib/bin/tractor.png
+     - lib/bin/compost.png
+     - lib/bin/axe.png
+     - lib/bin/bicycle.png
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

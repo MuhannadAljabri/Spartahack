@@ -7,12 +7,16 @@ class UrbanPage extends StatefulWidget {
 
 class _UrbanPageState extends State<UrbanPage> {
   List<String> availableImages = [
-    'lib/bin/EV.svg',
-    'lib/bin/factory.svg',
-    'lib/bin/gascar.png',
-    'lib/bin/hydcar.png',
-    'lib/bin/streetlight.svg',
-    'lib/bin/trash-bin.png',
+    'lib/bin/Tesla.png',
+    'lib/bin/Tree.jpg',
+    'lib/bin/Gas_Truck.png',
+    'lib/bin/Hydro_Car.png',
+    'lib/bin/Street_Light.png',
+    'lib/bin/Trash_Bin.png',
+    'lib/bin/Recycle_Bin.jpg',
+    'lib/bin/Factory.jpg',
+    'lib/bin/Bicycle.png',
+
   ];
 
   // Corrected Map declaration

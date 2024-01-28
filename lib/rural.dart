@@ -8,11 +8,8 @@ class RuralPage extends StatefulWidget {
 
 class _RuralPageState extends State<RuralPage> {
   List<String> availableImages = [
-    'lib/bin/cows.png',
-    'lib/bin/tractor.png',
-    'lib/bin/compost.png',
-    'assets/axe.png',
-    'assets/image5.png',
+    'lib/bin/Cow.png',
+    'lib/bin/Tractor.png',
   ];
 
   List<String> selectedImages = [];
@@ -35,7 +32,7 @@ class _RuralPageState extends State<RuralPage> {
       body: Stack(
         children: [
           Image.asset(
-            'lib/bin/farm_field.jpg', // Replace with your image asset path
+            'lib/bin/Farm Field.jpg', // Replace with your image asset path
             width: double.infinity,
             height: double.infinity,
             fit: BoxFit.cover,
