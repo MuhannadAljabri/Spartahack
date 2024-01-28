@@ -8,18 +8,30 @@ class UrbanPage extends StatefulWidget {
 class _UrbanPageState extends State<UrbanPage> {
   List<String> availableImages = [
     'lib/bin/Tesla.png',
-    'lib/bin/Tree.jpg',
+    'lib/bin/Tree.png',
     'lib/bin/Gas_Truck.png',
     'lib/bin/Hydro_Car.png',
     'lib/bin/Street_Light.png',
     'lib/bin/Trash_Bin.png',
-    'lib/bin/Recycle_Bin.jpg',
-    'lib/bin/factory.jpg',
+    'lib/bin/Recycle_Bin.png',
+    'lib/bin/factory.png',
     'lib/bin/bicycle.png',
+    'lib/bin/Solar_Panels.png',
+
   ];
 
   Map<String, Offset> imagePositions = {
     'lib/bin/Gas_Truck.png': Offset(500, 200),
+    'lib/bin/Tesla.png': Offset(400,200),
+    'lib/bin/Hydro_Car.png': Offset(300,200),
+    'lib/bin/Street_Light.png': Offset(175,180),
+    'lib/bin/Tree.png': Offset(75,200),
+    'lib/bin/Trash_Bin.png': Offset(650,225),
+    'lib/bin/Recycle_Bin.png': Offset(550,200),
+    'lib/bin/factory.png': Offset(320,160),
+    'lib/bin/bicycle.png': Offset(250,200),
+    'lib/bin/Solar_Panels.png': Offset(600,35),
+
     // Add other images and their positions here
   };
 

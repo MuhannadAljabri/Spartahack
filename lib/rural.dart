@@ -12,6 +12,7 @@ class _RuralPageState extends State<RuralPage> {
     'lib/bin/tractor.png',
     'lib/bin/Silo.jpg',
     'lib/bin/Solar_Panels.png'
+    'lib/bin/Tractor.png',
   ];
 
   List<String> selectedImages = [];
