@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:msu_hackathon/rural.dart';
 
 void main() {
   runApp(MyApp());
@@ -8,8 +9,12 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: MyHomePage(),
+    return MaterialApp(initialRoute: '/',
+      // Routes
+      routes: {
+        '/': (context) =>  MyHomePage(),
+        'rural_page':(context) =>  RuralPage()
+      },
     );
   }
 }
@@ -72,7 +77,11 @@ class _MyHomePageState extends State<MyHomePage> {
                   ElevatedButton(
                     onPressed: () {
                       // Handle button 2 press
-                      print("Button 2 pressed!");
+                      Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => RuralPage(),
+              ));
                     },
                     child: Container(
                       child: Center(child:Text("Rural")),
