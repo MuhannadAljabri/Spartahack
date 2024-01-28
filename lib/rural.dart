@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'last_page.dart';
+import 'last_page.dart'; // Ensure this import is correct.
 
 class RuralPage extends StatefulWidget {
   @override
@@ -9,10 +9,14 @@ class RuralPage extends StatefulWidget {
 class _RuralPageState extends State<RuralPage> {
   List<String> availableImages = [
     'lib/bin/Cow.png',
-    'lib/bin/tractor.png',
+    'lib/bin/tractor.png', // Ensure this is the correct path.
     'lib/bin/Silo.jpg',
-    'lib/bin/Solar_Panels.png'
-    'lib/bin/Tractor.png',
+    'lib/bin/Solar_Panels.png',
+    'lib/bin/Tree.png',
+    'lib/bin/axe.png',
+    'lib/bin/compost.png',
+    'lib/bin/Organic_Fertilizer.jpg',
+    'lib/bin/Chemical_Fertilizer.png',
   ];
 
   List<String> selectedImages = [];
@@ -20,9 +24,7 @@ class _RuralPageState extends State<RuralPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Image Placement"),
-      ),
+      appBar: AppBar(),
       drawer: AppDrawer(
         availableImages: availableImages,
         onImageSelected: (String imagePath) {
@@ -32,54 +34,65 @@ class _RuralPageState extends State<RuralPage> {
           });
         },
       ),
-      body: Stack(
-        children: [
-          Image.asset(
-            'lib/bin/Farm Field.jpg', // Replace with your image asset path
-            width: double.infinity,
-            height: double.infinity,
-            fit: BoxFit.cover,
-          ),
-          for (var imagePath in selectedImages)
-            Positioned(
-              left: 50.0 + selectedImages.indexOf(imagePath) * 100.0,
-              top: 75.0,
-              child: Image.asset(
-                imagePath,
-                width: 100.0,
-                height: 100.0,
-              ),
-            ),
-        ],
-      ),
-      floatingActionButton: Column(
-        mainAxisAlignment: MainAxisAlignment.end,
-        crossAxisAlignment: CrossAxisAlignment.end,
-        children: [
-      FloatingActionButton(
-        onPressed: () {
-          Navigator.pop(context); // Navigates back to the previous screen
+      body: Stack(children: buildStackedImages()),
+      floatingActionButton: buildFloatingActionButton(),
+    );
+  }
+
+List<Widget> buildStackedImages() {
+  var backgroundImage = Image.asset(
+    'lib/bin/Farm Field.jpg',
+    width: double.infinity,
+    height: double.infinity,
+    fit: BoxFit.cover,
+  );
+
+  var imageWidgets = <Widget>[backgroundImage];
+
+  imageWidgets.addAll(List<Widget>.generate(selectedImages.length, (index) {
+    String imagePath = selectedImages[index];
+    return Positioned(
+      left: 50.0 + index * 100.0,
+      top: 75.0,
+      child: GestureDetector(
+        onTap: () {
+          setState(() {
+            // Remove the image from selectedImages and add it back to availableImages
+            selectedImages.removeAt(index);
+            availableImages.add(imagePath);
+          });
         },
-        child: Icon(Icons.home), // Icon for the button
-        tooltip: 'Go back to home', // Tooltip text on long press
+        child: Image.asset(imagePath, width: 100.0, height: 100.0),
       ),
-      SizedBox(height: 10,),
-      FloatingActionButton.extended(
-        onPressed: () {
-          // Navigate to the new page and pass selectedImages
-          Navigator.push(
+    );
+  }));
+
+  return imageWidgets;
+}
+
+  Widget buildFloatingActionButton() {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.end,
+      crossAxisAlignment: CrossAxisAlignment.end,
+      children: [
+        FloatingActionButton(
+          onPressed: () => Navigator.pop(context),
+          child: Icon(Icons.home),
+          tooltip: 'Go back to home',
+        ),
+        SizedBox(height: 10),
+        FloatingActionButton.extended(
+          onPressed: () => Navigator.push(
             context,
             MaterialPageRoute(
               builder: (context) => SecondPage(selectedImages: selectedImages),
             ),
-          );
-        },
-        label: Text('Simulate'),
-        icon: Icon(Icons.navigate_next),
-        backgroundColor: Colors.blue,
-      ),]
-    )
-      
+          ),
+          label: Text('Simulate'),
+          icon: Icon(Icons.navigate_next),
+          backgroundColor: Colors.blue,
+        ),
+      ],
     );
   }
 }
@@ -94,20 +107,11 @@ class AppDrawer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Drawer(
       child: ListView(
-        children: [
-          for (var imagePath in availableImages)
-
-            ListTile(
-              leading: Image.asset(
-                imagePath,
-                width: 40.0,
-                height: 40.0,
-              ),
-              title: Text(imagePath.split('/').last.split('.').first)
-,
+        children: availableImages.map((imagePath) => ListTile(
+              leading: Image.asset(imagePath, width: 40.0, height: 40.0),
+              title: Text(imagePath.split('/').last.split('.').first),
               onTap: () => onImageSelected(imagePath),
-            ),
-        ],
+            )).toList(),
       ),
     );
   }
