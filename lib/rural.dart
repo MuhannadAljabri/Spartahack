@@ -1,38 +1,40 @@
 import 'package:flutter/material.dart';
 
-class RuralPage extends StatelessWidget {
+class RuralPage extends StatefulWidget {
+  @override
+  _RuralPageState createState() => _RuralPageState();
+}
+
+class _RuralPageState extends State<RuralPage> {
+  String? selectedItemPath; // Variable to hold the selected item path
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.transparent, // or your desired background color
       appBar: _buildAppBar(),
-      drawer: _buildDrawer(context),
+      drawer: _buildDrawer(),
       body: _buildBody(),
-      floatingActionButton: _buildFloatingActionButton(context),
+      floatingActionButton: _buildFloatingActionButton(),
     );
   }
 
-  AppBar _buildAppBar() {
-    return AppBar(
-      title: Text('Rural Page'),
-    );
-  }
+AppBar _buildAppBar() {
+  return AppBar(
+    elevation: 0, // Optional: Removes the shadow under the AppBar
+  );
+}
 
-  Drawer _buildDrawer(BuildContext context) {
+
+
+  Drawer _buildDrawer() {
     return Drawer(
       child: ListView(
         padding: EdgeInsets.zero,
         children: <Widget>[
           _buildDrawerHeader(),
-          _buildDrawerItem(
-            icon: Icons.nature,
-            text: 'Item 1',
-            onTap: () => _onDrawerItemTapped(context),
-          ),
-          _buildDrawerItem(
-            icon: Icons.landscape,
-            text: 'Item 2',
-            onTap: () => _onDrawerItemTapped(context),
-          ),
+          _buildDrawerItem('lib/bin/cows.png', 'Cow'),
+          _buildDrawerItem('assets/landscape.png', 'Item 2'),
           // Add more list items as needed
         ],
       ),
@@ -42,67 +44,60 @@ class RuralPage extends StatelessWidget {
   DrawerHeader _buildDrawerHeader() {
     return DrawerHeader(
       decoration: BoxDecoration(color: Colors.blue),
-      child: Text(
-        'Menu',
-        style: TextStyle(color: Colors.white, fontSize: 24),
-      ),
+      child: Text('Select Items', style: TextStyle(color: Colors.white, fontSize: 24)),
     );
   }
 
-  ListTile _buildDrawerItem({
-    required IconData icon,
-    required String text,
-    required VoidCallback onTap,
-  }) {
+  ListTile _buildDrawerItem(String imagePath, String text) {
     return ListTile(
-      leading: Icon(icon),
+      leading: Container(
+        width: 40,
+        height: 40,
+        child: Center(child: Image.asset(imagePath, fit: BoxFit.contain)),
+      ),
       title: Text(text),
-      onTap: onTap,
-    );
-  }
-
-  void _onDrawerItemTapped(BuildContext context) {
-    // Update the state of the app
-    // ...
-    // Then close the drawer
-    Navigator.pop(context);
-  }
-
-  Container _buildBody() {
-    return Container(
-      width: double.infinity,
-      height: double.infinity,
-      decoration: BoxDecoration(
-        image: DecorationImage(
-          image: AssetImage('lib/bin/farm_field.jpg'), // Replace with your image asset path
-          fit: BoxFit.cover,
-        ),
-      ),
-      child: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              "",
-              style: TextStyle(
-                fontSize: 24,
-                color: Colors.white,
-              ),
-            ),
-            // Add more widgets as needed
-          ],
-        ),
-      ),
-    );
-  }
-
-  FloatingActionButton _buildFloatingActionButton(BuildContext context) {
-    return FloatingActionButton(
-      onPressed: () {
-        Navigator.pop(context); // Navigate back to the previous screen
+      onTap: () {
+        setState(() {
+          selectedItemPath = imagePath;
+        });
+        Navigator.pop(context);
       },
-      child: Icon(Icons.home), // Icon for the button
-      tooltip: 'Go back to home', // Tooltip text on long press
+    );
+  }
+
+Container _buildBody() {
+  return Container(
+    width: double.infinity,
+    height: double.infinity,
+    decoration: BoxDecoration(
+      image: DecorationImage(
+        image: AssetImage('lib/bin/farm_field.jpg'), // Background image
+        fit: BoxFit.cover,
+      ),
+    ),
+    child: Center(
+      child: selectedItemPath != null
+          ? Container(
+              width: 100, // Width of the container
+              height: 100, // Height of the container
+              child: Image.asset(
+                selectedItemPath!,
+                fit: BoxFit.contain, // Keeps image aspect ratio
+              ),
+            )
+          : Text( "", // Text displayed when no item is selected
+ style: TextStyle(fontSize: 24, color: Colors.white),
+            ),
+    ),
+  );
+}
+
+
+  FloatingActionButton _buildFloatingActionButton() {
+    return FloatingActionButton(
+      onPressed: () => Navigator.pop(context),
+      child: Icon(Icons.home),
+      tooltip: 'Go back to home',
     );
   }
 }
