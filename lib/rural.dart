@@ -20,7 +20,6 @@ class _RuralPageState extends State<RuralPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Image Placement"),
       ),
       drawer: AppDrawer(
         availableImages: availableImages,
@@ -72,17 +71,20 @@ class AppDrawer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Drawer(
       child: ListView(
-        children: [
-          for (var imagePath in availableImages)
-            ListTile(
-              title: Image.asset(
-                imagePath,
-                width: 40.0,
-                height: 40.0,
-              ),
-              onTap: () => onImageSelected(imagePath),
+        children: availableImages.map((imagePath) {
+          // Extracting the image name from the path for displaying as text
+          var imageName = imagePath.split('/').last.split('.').first;
+
+          return ListTile(
+            leading: Image.asset(
+              imagePath,
+              width: 40.0,
+              height: 40.0,
             ),
-        ],
+            title: Text(imageName), // Display the image name here
+            onTap: () => onImageSelected(imagePath),
+          );
+        }).toList(),
       ),
     );
   }
