@@ -6,97 +6,80 @@ class RuralPage extends StatefulWidget {
 }
 
 class _RuralPageState extends State<RuralPage> {
-  String? selectedItemPath; // Variable to hold the selected item path
+
+  List<String> availableImages = [
+    'lib/bin/cows.png',
+    'lib/bin/tractor.png',
+    'assets/image3.png',
+    'assets/image4.png',
+    'assets/image5.png',
+  ];
+
+  List<String> selectedImages = [];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: _buildAppBar(),
-      drawer: _buildDrawer(),
-      body: _buildBody(),
-      floatingActionButton: _buildFloatingActionButton(),
-    );
-  }
-
-AppBar _buildAppBar() {
-  return AppBar(
-    elevation: 0, // Optional: Removes the shadow under the AppBar
-  );
-}
-
-
-
-  Drawer _buildDrawer() {
-    return Drawer(
-      child: ListView(
-        padding: EdgeInsets.zero,
-        children: <Widget>[
-          _buildDrawerHeader(),
-          _buildDrawerItem('lib/bin/cows.png', 'Cow'),
-          _buildDrawerItem('assets/landscape.png', 'Item 2'),
-          // Add more list items as needed
+      appBar: AppBar(
+        title: Text("Image Placement"),
+      ),
+      drawer: AppDrawer(
+        availableImages: availableImages,
+        onImageSelected: (String imagePath) {
+          setState(() {
+            availableImages.remove(imagePath);
+            selectedImages.add(imagePath);
+          });
+        },
+      ),
+      body: Stack(
+        children: [
+          // Background image
+          Image.asset(
+            'lib/bin/farm_field.jpg', // Replace with your image asset path
+            width: double.infinity,
+            height: double.infinity,
+            fit: BoxFit.cover,
+          ),
+          // Placed images
+          for (var imagePath in selectedImages)
+            Positioned(
+              left: 50.0 + selectedImages.indexOf(imagePath) * 100.0,
+              top: 50.0,
+              child: Image.asset(
+                imagePath,
+                width: 100.0,
+                height: 100.0,
+              ),
+            ),
         ],
       ),
     );
   }
-
-  DrawerHeader _buildDrawerHeader() {
-    return DrawerHeader(
-      decoration: BoxDecoration(color: Colors.blue),
-      child: Text('Select Items', style: TextStyle(color: Colors.white, fontSize: 24)),
-    );
-  }
-
-  ListTile _buildDrawerItem(String imagePath, String text) {
-    return ListTile(
-      leading: Container(
-        width: 40,
-        height: 40,
-        child: Center(child: Image.asset(imagePath, fit: BoxFit.contain)),
-      ),
-      title: Text(text),
-      onTap: () {
-        setState(() {
-          selectedItemPath = imagePath;
-        });
-        Navigator.pop(context);
-      },
-    );
-  }
-
-Container _buildBody() {
-  return Container(
-    width: double.infinity,
-    height: double.infinity,
-    decoration: BoxDecoration(
-      image: DecorationImage(
-        image: AssetImage('lib/bin/farm_field.jpg'), // Background image
-        fit: BoxFit.cover,
-      ),
-    ),
-    child: Center(
-      child: selectedItemPath != null
-          ? Container(
-              width: 100, // Width of the container
-              height: 100, // Height of the container
-              child: Image.asset(
-                selectedItemPath!,
-                fit: BoxFit.contain, // Keeps image aspect ratio
-              ),
-            )
-          : Text( "", // Text displayed when no item is selected
- style: TextStyle(fontSize: 24, color: Colors.white),
-            ),
-    ),
-  );
 }
 
+class AppDrawer extends StatelessWidget {
+  final List<String> availableImages;
+  final Function(String) onImageSelected;
 
-  FloatingActionButton _buildFloatingActionButton() {
-    return FloatingActionButton(
-      onPressed: () => Navigator.pop(context),
-      child: Icon(Icons.home),
-      tooltip: 'Go back to home',
+  AppDrawer({required this.availableImages, required this.onImageSelected});
+
+  @override
+  Widget build(BuildContext context) {
+    return Drawer(
+      child: ListView(
+        children: [
+          for (var imagePath in availableImages)
+            ListTile(
+              title: Image.asset(
+                imagePath,
+                width: 40.0,
+                height: 40.0,
+              ),
+              onTap: () => onImageSelected(imagePath),
+            ),
+        ],
+      ),
     );
   }
 }

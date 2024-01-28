@@ -4,6 +4,7 @@ import 'package:msu_hackathon/rural.dart';
 import 'package:msu_hackathon/urban.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
+import 'test.dart';
 
 void main() async {
   runApp(MyApp());
@@ -18,7 +19,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       initialRoute: '/',
       routes: {
-        '/': (context) => MyHomePage(),
+        '/': (context) => DragPage(),
         'rural_page': (context) => RuralPage(),
         'urban_page': (context) => UrbanPage(),
       },
