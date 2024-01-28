@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'last_page.dart'; // Ensure this import is correct.
+import 'last_page_rural.dart'; // Ensure this import is correct.
 
 class RuralPage extends StatefulWidget {
   @override
