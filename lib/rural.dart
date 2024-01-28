@@ -6,7 +6,6 @@ class RuralPage extends StatefulWidget {
 }
 
 class _RuralPageState extends State<RuralPage> {
-
   List<String> availableImages = [
     'lib/bin/cows.png',
     'lib/bin/tractor.png',
@@ -34,14 +33,12 @@ class _RuralPageState extends State<RuralPage> {
       ),
       body: Stack(
         children: [
-          // Background image
           Image.asset(
             'lib/bin/farm_field.jpg', // Replace with your image asset path
             width: double.infinity,
             height: double.infinity,
             fit: BoxFit.cover,
           ),
-          // Placed images
           for (var imagePath in selectedImages)
             Positioned(
               left: 50.0 + selectedImages.indexOf(imagePath) * 100.0,
@@ -53,6 +50,13 @@ class _RuralPageState extends State<RuralPage> {
               ),
             ),
         ],
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.pop(context); // Navigates back to the previous screen
+        },
+        child: Icon(Icons.home), // Icon for the button
+        tooltip: 'Go back to home', // Tooltip text on long press
       ),
     );
   }

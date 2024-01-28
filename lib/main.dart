@@ -4,13 +4,13 @@ import 'package:msu_hackathon/rural.dart';
 import 'package:msu_hackathon/urban.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
-import 'test.dart';
 
 void main() async {
-  runApp(MyApp());
+  WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
-  options: DefaultFirebaseOptions.currentPlatform,
-);
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -45,6 +45,22 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
+  @override
+  void initState() {
+    super.initState();
+    _setOrientationAndUIConfig();
+  }
+
+  @override
+  void dispose() {
+    // Reset orientation on dispose, if needed
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
+    super.dispose();
+  }
+
   void _setOrientationAndUIConfig() {
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.landscapeLeft,
@@ -54,17 +70,16 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   Widget _buildStartButton() {
-    return Container(
-      width: 200,
-      height: 200,
-      decoration: BoxDecoration(
-        shape: BoxShape.rectangle,
-        borderRadius: BorderRadius.circular(20),
+    return ElevatedButton(
+      onPressed: () => setState(() => showStartButton = false),
+      style: ElevatedButton.styleFrom(
+        primary: Colors.blue, // Button color
+        onPrimary: Colors.white, // Text color
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20),
+        ),
       ),
-      child: ElevatedButton(
-        onPressed: () => setState(() => showStartButton = false),
-        child: Text("Start"),
-      ),
+      child: Text("Start"),
     );
   }
 
@@ -72,30 +87,19 @@ class _MyHomePageState extends State<MyHomePage> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
-        _navigationButton("Urban", () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => UrbanPage()),
-          );
-        }),
-        _navigationButton("Rural", () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => RuralPage()),
-          );
-        }),
+        _navigationButton("Urban", 'urban_page'),
+        _navigationButton("Rural", 'rural_page'),
       ],
     );
   }
 
-  Widget _navigationButton(String text, VoidCallback onPressed) {
+  Widget _navigationButton(String text, String routeName) {
     return ElevatedButton(
-      onPressed: onPressed,
-      child: Container(
-        child: Center(child: Text(text)),
-        width: 60,
-        height: 60,
-        decoration: BoxDecoration(shape: BoxShape.circle),
+      onPressed: () => Navigator.pushNamed(context, routeName),
+      child: Text(text),
+      style: ElevatedButton.styleFrom(
+        shape: CircleBorder(),
+        padding: EdgeInsets.all(24), // Adjust padding
       ),
     );
   }
